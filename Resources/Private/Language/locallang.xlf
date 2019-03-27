@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2019-03-19T16:19:15Z" product-name="md_unreadnews">
+        <header/>
+        <body>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews">
+                <source>Unreadnews</source>
+            </trans-unit>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.news_uid">
+                <source>News Uid</source>
+            </trans-unit>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.feuser_uid">
+                <source>Feuser Uid</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

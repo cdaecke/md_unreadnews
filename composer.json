@@ -1,0 +1,38 @@
+{
+    "name": "mediadreams/md_unreadnews",
+    "type": "typo3-cms-extension",
+    "description": "This extension adds a flag for unread news.",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "news",
+        "unread"
+    ],
+    "authors": [
+        {
+            "name": "Christoph Daecke",
+            "role": "Developer"
+        }
+    ],
+    "license": ["GPL-2.0-or-later"],
+    "require": {
+        "typo3/cms-core": "^8.7.0|| ^9.5.0"
+    },
+    "suggest": {
+        "georgringer/news": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mediadreams\\MdUnreadnews\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mediadreams\\MdUnreadnews\\Tests\\": "Tests"
+        }
+    },
+    "replace": {
+        "md_unreadnews": "self.version",
+        "typo3-ter/md-unreadnews": "self.version"
+    }
+}

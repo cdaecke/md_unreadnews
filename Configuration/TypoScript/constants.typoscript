@@ -1,0 +1,26 @@
+
+plugin.tx_mdunreadnews_unread {
+    view {
+        # cat=plugin.tx_mdunreadnews_unread/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:md_unreadnews/Resources/Private/Templates/
+        # cat=plugin.tx_mdunreadnews_unread/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:md_unreadnews/Resources/Private/Partials/
+        # cat=plugin.tx_mdunreadnews_unread/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:md_unreadnews/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_mdunreadnews_unread//a; type=string; label=Default storage PID
+        storagePid =
+    }
+
+    settings {
+        # cat=plugin.tx_mdunreadnews_unread//a; type=string; label=Uid of storage page for table tx_mdunreadnews_domain_model_unreadnews 
+        storagePid = 
+
+        # cat=plugin.tx_mdunreadnews_unread//a; type=string; label=Categories, which should be considered
+        categories = 
+
+        # cat=plugin.tx_mdunreadnews_unread//a; type=int; label=Just add unread record for users who belong to selected fe_group
+        feGroup = 
+    }
+}
