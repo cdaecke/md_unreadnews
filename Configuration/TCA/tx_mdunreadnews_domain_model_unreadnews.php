@@ -127,8 +127,6 @@ return [
                         'type' => 'suggest',
                         'default' => [
                             'searchWholePhrase' => true,
-                            // ###PAGE_TSCONFIG_STR### will be set with TCEFORM.tx_news_domain_model_news.ipg_simplepoll.PAGE_TSCONFIG_STR = 1
-                            //'addWhere' => ' AND tx_simplepoll_domain_model_simplepoll.pid = ###PAGE_TSCONFIG_STR### '
                         ]
                     ],
                 ],
@@ -153,8 +151,6 @@ return [
                         'type' => 'suggest',
                         'default' => [
                             'searchWholePhrase' => true,
-                            // ###PAGE_TSCONFIG_STR### will be set with TCEFORM.tx_news_domain_model_news.ipg_simplepoll.PAGE_TSCONFIG_STR = 1
-                            //'addWhere' => ' AND tx_simplepoll_domain_model_simplepoll.pid = ###PAGE_TSCONFIG_STR### '
                         ]
                     ],
                 ],
@@ -165,7 +161,6 @@ return [
                 'default' => 0,
                 'eval' => 'trim,int,required'
             ]
-        ],
-    
+        ],    
     ],
 ];

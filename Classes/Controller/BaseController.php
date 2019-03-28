@@ -30,7 +30,7 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
     /**
      * Initialize actions
-     * Add pissibility to overwrite settings
+     * Add possibility to overwrite settings
      */
     protected function initializeAction()
     {

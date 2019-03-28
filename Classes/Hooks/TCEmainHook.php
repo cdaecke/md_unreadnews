@@ -97,7 +97,10 @@ class TCEmainHook
         $allowedGroup = trim($typoscriptSettings['feGroup']);
         if ($allowedGroup) {
             $feuserData = $feuserData->where( 
-                                $queryBuilderFeusers->expr()->inSet('usergroup', $queryBuilderFeusers->createNamedParameter($allowedGroup, \PDO::PARAM_INT))
+                                $queryBuilderFeusers->expr()->inSet(
+                                    'usergroup', 
+                                    $queryBuilderFeusers->createNamedParameter($allowedGroup, \PDO::PARAM_INT)
+                                )
                             );
         }
 
