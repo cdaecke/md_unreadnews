@@ -12,15 +12,15 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Unread news',
-    'description' => 'This extension adds a flag for unread news.',
+    'description' => 'This extension adds unread information to the records of ext:news for frontend users.',
     'category' => 'plugin',
     'author' => 'Christoph Daecke',
     'author_email' => 'typo3@mediadreams.org',
-    'state' => 'alpha',
+    'state' => 'stable',
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
-    'version' => '0.0.1',
+    'version' => '1.0.0',
     'constraints' => [
         'depends' => [
             'typo3' => '8.7.0-9.5.99',
