@@ -14,13 +14,13 @@ plugin.tx_mdunreadnews_unread {
     }
 
     settings {
-        # cat=plugin.tx_mdunreadnews_unread//a; type=string; label=Uid of storage page for table tx_mdunreadnews_domain_model_unreadnews 
+        # cat=plugin.tx_mdunreadnews_unread//a; type=int+; label=Uid of storage page for table tx_mdunreadnews_domain_model_unreadnews 
         storagePid = 
 
         # cat=plugin.tx_mdunreadnews_unread//a; type=string; label=Categories, which should be considered
         categories = 
 
-        # cat=plugin.tx_mdunreadnews_unread//a; type=int; label=Just add unread record for users who belong to selected fe_group
+        # cat=plugin.tx_mdunreadnews_unread//a; type=int+; label=Just add unread record for users who belong to selected fe_group
         feGroup = 
     }
 }
