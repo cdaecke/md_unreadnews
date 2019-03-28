@@ -54,6 +54,25 @@ class TCEmainHook
             // get uid of new record
             $newsUid = $pObj->substNEWwithIDs[$recordUid];
 
+            if (!$newsUid) {
+                /** @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
+                $flashMessage = GeneralUtility::makeInstance(
+                    \TYPO3\CMS\Core\Messaging\FlashMessage::class,
+                    'Unread info for news could not be saved!',
+                    'EXT:md_unreadnews',
+                    \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING,
+                    true
+                );
+                
+                /** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
+                $flashMessageService = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Messaging\FlashMessageService::class);
+                /** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
+                $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+                $defaultFlashMessageQueue->enqueue($flashMessage);
+
+                return;
+            }
+
             $typoscriptSettings = $this->getTyposcriptSettings();
             $allowedCategories = GeneralUtility::trimExplode(',', $typoscriptSettings['categories'], true);
 
