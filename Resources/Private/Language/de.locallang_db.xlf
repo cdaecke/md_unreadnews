@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2019-03-19T16:19:15Z" product-name="md_unreadnews">
+        <header/>
+        <body>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews">
+                <source>Unreadnews</source>
+                <target>Ungelesene Nachrichten</target>
+            </trans-unit>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.news_uid">
+                <source>News Uid</source>
+                <target>News Uid</target>
+            </trans-unit>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.feuser_uid">
+                <source>Feuser Uid</source>
+                <target>Feuser Uid</target>
+            </trans-unit>
+            <trans-unit id="tx_md_unreadnews_unread.name">
+                <source>Unread News</source>
+                <target>Ungelesene Nachrichten</target>
+            </trans-unit>
+            <trans-unit id="tx_md_unreadnews_unread.description">
+                <source>Get info, if news is unread.</source>
+                <target>Info, ob eine Nachricht ungelesen ist.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
