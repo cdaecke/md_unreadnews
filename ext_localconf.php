@@ -8,11 +8,11 @@ call_user_func(
             'Mediadreams.MdUnreadnews',
             'Unread',
             [
-                'Unreadnews' => 'isUnread, categoryCount, removeUnread'
+                'Unreadnews' => 'list, isUnread, allUnreadCount, categoryCount, removeUnread'
             ],
             // non-cacheable actions
             [
-                'Unreadnews' => 'isUnread, categoryCount, removeUnread'
+                'Unreadnews' => 'isUnread, allUnreadCount, categoryCount, removeUnread'
             ]
         );
 
@@ -31,6 +31,5 @@ call_user_func(
             ['processDatamapClass']
             ['md_unreadnews'] = 'Mediadreams\\MdUnreadnews\\Hooks\\TCEmainHook';
 
-        
     }
 );

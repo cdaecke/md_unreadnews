@@ -21,6 +21,15 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 abstract class AbstractRepository extends Repository
 {
     /**
+     * Default orderings
+     *
+     */
+    protected $defaultOrderings = [
+        'news_datetime' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+        'uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+    ];
+
+    /**
      * Disable storage page for all repository calls
      *
      * @return void

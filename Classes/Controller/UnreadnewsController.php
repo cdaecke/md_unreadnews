@@ -18,6 +18,20 @@ namespace Mediadreams\MdUnreadnews\Controller;
 class UnreadnewsController extends BaseController
 {
     /**
+     * List all unread news for user
+     *
+     * @return void
+     */
+    public function listAction()
+    {
+        if (isset($this->loggedinUserUid)) {
+            $unreadnews = $this->unreadnewsRepository->findByFeuser($this->loggedinUserUid);
+
+            $this->view->assign('unreadnews', $unreadnews);
+        }
+    }
+
+    /**
      * Get info, if selected news is unread for user
      *
      * @return void

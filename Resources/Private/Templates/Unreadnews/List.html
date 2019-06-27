@@ -1,0 +1,27 @@
+<html xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default" />
+
+    <f:section name="content">
+        <f:if condition="{unreadnews}">
+            <f:then>
+                <f:widget.paginate objects="{unreadnews}" as="paginatedNews" configuration="{itemsPerPage: settings.list.paginate.itemsPerPage, insertAbove: settings.list.paginate.insertAbove, insertBelow: settings.list.paginate.insertBelow, maximumNumberOfLinks: settings.list.paginate.maximumNumberOfLinks}">
+                    <f:for each="{paginatedNews}" as="unreadnewsItem" iteration="i">
+                        <f:if condition="{settings.singlePid}">
+                            <f:then>
+                                <f:render partial="Unread/ListItem" arguments="{unreadnewsItem: unreadnewsItem, singlePid: settings.singlePid, settings: settings}" />
+                            </f:then>
+                            <f:else>
+                                <f:render partial="Unread/ListItem" arguments="{unreadnewsItem: unreadnewsItem, singlePid: unreadnewsItem.news.firstCategory.singlePid, settings: settings}" />
+                            </f:else>
+                        </f:if>
+                    </f:for>
+                </f:widget.paginate>
+            </f:then>
+            <f:else>
+                <div class="no-news-found">
+                    <f:translate key="nonewsfound" />
+                </div>
+            </f:else>
+        </f:if>
+    </f:section>
+</html>

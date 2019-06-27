@@ -27,6 +27,34 @@ plugin.tx_mdunreadnews_unread {
         storagePid = {$plugin.tx_mdunreadnews_unread.settings.storagePid}
         categories = {$plugin.tx_mdunreadnews_unread.settings.categories}
         feGroup = {$plugin.tx_mdunreadnews_unread.settings.feGroup}
+
+        cropMaxCharacters = 150
+        displayDummyIfNoMedia = 1
+
+        list {
+            # media configuration
+            media {
+                image {
+                    maxWidth = 200
+                    maxHeight = 200
+                }
+
+                video {
+                    width = 200
+                    height = 250
+                }
+
+                dummyImage = typo3conf/ext/news/Resources/Public/Images/dummy-preview-image.png
+            }
+
+            # Paginate configuration.
+            paginate {
+                itemsPerPage = 10
+                insertAbove = 0
+                insertBelow = 1
+                maximumNumberOfLinks = 3
+            }
+        }
     }
 }
 

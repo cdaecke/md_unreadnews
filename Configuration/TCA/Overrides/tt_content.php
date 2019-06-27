@@ -4,19 +4,24 @@ defined('TYPO3_MODE') || die();
 call_user_func(
     function()
     {
-
         /**
          * Register plugin
          *
          */
-        /*
-        // do not register the plugin, but load it via typoscript
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
             'Mediadreams.MdUnreadnews',
             'Unread',
-            'Unread News'
+            'LLL:EXT:md_unreadnews/Resources/Private/Language/locallang.xlf:unreadPlugin'
         );
-        */
 
+        /**
+         * Load flexform for unread plugin
+         *
+         */
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['mdunreadnews_unread'] = 'pi_flexform';
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+            'mdunreadnews_unread', 
+            'FILE:EXT:md_unreadnews/Configuration/FlexForms/UnreadPlugin.xml'
+        );
     }
 );

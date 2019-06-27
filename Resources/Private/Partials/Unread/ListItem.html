@@ -1,0 +1,57 @@
+<html xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:link.page pageUid="{singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}">
+        <div class="row mb-5 {f:if(condition:'{i.isEven}',then:'even',else:'odd')}">
+            <div class="col-sm-4">
+                <f:if condition="{unreadnewsItem.news.mediaPreviews}">
+                    <f:then>
+                        <div class="news-img-wrap">
+                            <f:alias map="{mediaElement: unreadnewsItem.news.mediaPreviews.0}">
+                                <f:if condition="{mediaElement.originalResource.type} == 2">
+                                    <f:image image="{mediaElement}" title="{mediaElement.originalResource.title}" alt="{mediaElement.originalResource.alternative}" maxWidth="{settings.list.media.image.maxWidth}" maxHeight="{settings.list.media.image.maxHeight}" class="img-fluid" />
+                                </f:if>
+                                <f:if condition="{mediaElement.originalResource.type} == 4">
+                                    <div class="mediaelement">
+                                        <div class="mediaelement-video">
+                                            <f:media file="{mediaElement}" width="{settings.list.media.video.width}" height="{settings.list.media.video.height}"/>
+                                        </div>
+
+                                        <f:if condition="{mediaElement.description}">
+                                            <div class="medialement-alternative-content">
+                                                <p class="news-img-caption">
+                                                    {mediaElement.description}
+                                                </p>
+                                            </div>
+                                        </f:if>
+                                    </div>
+                                </f:if>
+                                <f:if condition="{mediaElement.originalResource.type} == 5">
+                                    <f:image image="{mediaElement}" title="{mediaElement.originalResource.title}" alt="{mediaElement.originalResource.alternative}" maxWidth="{settings.list.media.image.maxWidth}" maxHeight="{settings.list.media.image.maxHeight}" class="img-fluid" />
+                                </f:if>
+                            </f:alias>
+                        </div>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{settings.displayDummyIfNoMedia}">
+                            <div class="news-img-wrap">
+                                <span class="no-media-element">
+                                    <f:image src="{settings.list.media.dummyImage}" title="" alt="" maxWidth="{settings.list.media.image.maxWidth}" maxHeight="{settings.list.media.image.maxHeight}"/>
+                                </span>
+                            </div>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </div>
+            <div class="teaser-text col-sm-8">
+                <h3>{unreadnewsItem.news.title}</h3>
+                <f:if condition="{unreadnewsItem.news.teaser}">
+                    <f:then>
+                        <div itemprop="description">{unreadnewsItem.news.teaser -> f:format.html()}</div>
+                    </f:then>
+                    <f:else>
+                        <div itemprop="description">{unreadnewsItem.news.bodytext -> f:format.crop(maxCharacters: '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}</div>
+                    </f:else>
+                </f:if>
+            </div>
+        </div>
+    </f:link.page>
+</html>

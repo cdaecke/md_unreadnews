@@ -16,6 +16,20 @@
                 <target>Feuser</target>
             </trans-unit>
 
+            <trans-unit id="flexforms.singlePid">
+                <source>Link to detail page (if empty, the detail link of first category will be used)</source>
+                <target>Link zur Detail Seite (wenn leer, dann wird der Detail Link der ersten Kategorie verwendet)</target>
+            </trans-unit>
+
+            <trans-unit id="nonewsfound">
+                <source>No news available.</source>
+                <target>Keine Beiträge vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="unreadPlugin">
+                <source>Unread News</source>
+                <target>Ungelesene Nachrichten</target>
+            </trans-unit>
+
             <trans-unit id="template.unread">
                 <source>Unread</source>
                 <target>Ungelesen</target>

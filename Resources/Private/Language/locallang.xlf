@@ -13,6 +13,17 @@
                 <source>Feuser</source>
             </trans-unit>
 
+            <trans-unit id="flexforms.singlePid">
+                <source>Link to detail page (if empty, the detail link of first category will be used)</source>
+            </trans-unit>
+
+            <trans-unit id="nonewsfound">
+                <source>No news available.</source>
+            </trans-unit>
+            <trans-unit id="unreadPlugin">
+                <source>Unread News</source>
+            </trans-unit>
+
             <trans-unit id="template.unread">
                 <source>Unread</source>
             </trans-unit>
