@@ -38,6 +38,21 @@ class UnreadnewsController extends BaseController
     }
 
     /**
+     * Get number of all unread items
+     *
+     * @return void
+     */
+    public function allUnreadCountAction()
+    {
+        $unreadnews = $this
+                      ->unreadnewsRepository
+                      ->findByFeuserUid($this->loggedinUserUid)
+                      ->count();
+
+        $this->view->assign('unreadnews', $unreadnews);
+    }
+
+    /**
      * Get number of unread items per category
      *
      * @return void

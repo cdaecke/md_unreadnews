@@ -58,6 +58,26 @@ lib.mdIsUnread {
 }
 
 /**
+ * This lib can be used to show the number of all unread news
+ * Use following code in your fluid template
+ * <f:cObject typoscriptObjectPath="lib.mdAllUnreadCount" />
+ *
+ */
+lib.mdAllUnreadCount = USER
+lib.mdAllUnreadCount {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    extensionName = MdUnreadnews
+    pluginName = Unread
+    vendorName = Mediadreams
+
+    switchableControllerActions {
+        Unreadnews {
+            1 = allUnreadCount
+        }
+    }
+}
+
+/**
  * This lib can be used to show how many items are unread in a category
  * Use following code in your fluid template
  * <f:cObject typoscriptObjectPath="lib.mdCategoryCount" data="{categoryUid:'{categoryUid}'}" />
