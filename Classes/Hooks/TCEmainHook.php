@@ -135,16 +135,19 @@ class TCEmainHook
             $timestamp = time();
             foreach ($feuserData as $data) {
                 $dataArray[] = [
-                    'pid' => !empty($typoscriptSettings['storagePid'])? trim($typoscriptSettings['storagePid']):0,
-                    'news' => $newsUid,
-                    'feuser' => $data['uid'],
+                    'pid'           => !empty($typoscriptSettings['storagePid'])? trim($typoscriptSettings['storagePid']):0,
+                    'news'          => $newsUid,
+                    'feuser'        => $data['uid'],
                     'news_datetime' => $fieldArray['datetime'],
-                    'tstamp' =>  $timestamp,
-                    'crdate' => $timestamp,
+                    'tstamp'        => $timestamp,
+                    'crdate'        => $timestamp,
+                    'hidden'        => $fieldArray['hidden'],
+                    'starttime'     => $fieldArray['starttime'],
+                    'endtime'       => $fieldArray['endtime'],
                 ];
             }
             
-            $colNamesArray = ['pid', 'news', 'feuser', 'news_datetime', 'tstamp', 'crdate'];
+            $colNamesArray = ['pid', 'news', 'feuser', 'news_datetime', 'tstamp', 'crdate', 'hidden', 'starttime', 'endtime'];
 
             $dbConnectionUnreadnews = $connectionPool->getConnectionForTable('tx_mdunreadnews_domain_model_unreadnews');
             $dbConnectionUnreadnews->bulkInsert(

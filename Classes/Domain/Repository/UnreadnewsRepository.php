@@ -69,6 +69,7 @@ class UnreadnewsRepository extends AbstractRepository
     public function getCountForCategory(int $categoryUid, int $feuserUid)
     {
         $query = $this->createQuery();
+        $enableFields = $GLOBALS['TSFE']->sys_page->enableFields('tx_mdunreadnews_domain_model_unreadnews');
 
         $sql = '
             SELECT sys_category_record_mm.uid_foreign
@@ -78,6 +79,7 @@ class UnreadnewsRepository extends AbstractRepository
                 ON tx_mdunreadnews_domain_model_unreadnews.news = sys_category_record_mm.uid_foreign
             WHERE 
                 tx_mdunreadnews_domain_model_unreadnews.feuser = '.$feuserUid.'
+                '.$enableFields.'
                 AND sys_category_record_mm.uid_local = '.$categoryUid.'
                 AND sys_category_record_mm.tablenames = "tx_news_domain_model_news"
                 AND sys_category_record_mm.fieldname = "categories"
