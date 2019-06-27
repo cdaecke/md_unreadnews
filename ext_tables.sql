@@ -8,6 +8,7 @@ CREATE TABLE tx_mdunreadnews_domain_model_unreadnews (
 
     news int(11) DEFAULT '0' NOT NULL,
     feuser int(11) DEFAULT '0' NOT NULL,
+    news_datetime int(11) DEFAULT '0' NOT NULL,
 
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,
     crdate int(11) unsigned DEFAULT '0' NOT NULL,

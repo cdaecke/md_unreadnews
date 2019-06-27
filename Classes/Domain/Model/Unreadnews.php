@@ -36,6 +36,11 @@ class Unreadnews extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $feuser = 0;
 
     /**
+     * @var \DateTime
+     */
+    protected $newsDatetime;
+
+    /**
      * Returns the news
      *
      * @return int $news
@@ -75,5 +80,25 @@ class Unreadnews extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setFeuser($feuser)
     {
         $this->feuser = $feuser;
+    }
+
+    /**
+     * Get newsDatetime
+     *
+     * @return \DateTime
+     */
+    public function getNewsDatetime()
+    {
+        return $this->newsDatetime;
+    }
+
+    /**
+     * Set date time
+     *
+     * @param \DateTime $newsDatetime newsDatetime
+     */
+    public function setNewsDatetime($newsDatetime)
+    {
+        $this->newsDatetime = $newsDatetime;
     }
 }

@@ -87,10 +87,10 @@ class TCEmainHook
                 // if $matchedCategories has at least one matched element, add unread info
                 if (count($matchedCategories) > 0) {
                     // add unread data
-                    $this->saveUnreadInfo($newsUid, $typoscriptSettings);
+                    $this->saveUnreadInfo($newsUid, $fieldArray, $typoscriptSettings);
                 }
             } else { // if no categories configured in typoscript, add always unread info
-                $this->saveUnreadInfo($newsUid, $typoscriptSettings);
+                $this->saveUnreadInfo($newsUid, $fieldArray, $typoscriptSettings);
             }
         }
     }
@@ -99,10 +99,11 @@ class TCEmainHook
      * Save unread info for news record
      *
      * @param int $newsUid Uid of news record
+     * @param array $fieldArray Data of news entry
      * @param array $typoscriptSettings Typoscript settings
      * @return void
      */
-    private function saveUnreadInfo(int $newsUid, $typoscriptSettings)
+    private function saveUnreadInfo(int $newsUid, $fieldArray, $typoscriptSettings)
     {
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
@@ -137,12 +138,13 @@ class TCEmainHook
                     'pid' => !empty($typoscriptSettings['storagePid'])? trim($typoscriptSettings['storagePid']):0,
                     'news' => $newsUid,
                     'feuser' => $data['uid'],
+                    'news_datetime' => $fieldArray['datetime'],
                     'tstamp' =>  $timestamp,
                     'crdate' => $timestamp,
                 ];
             }
             
-            $colNamesArray = ['news', 'feuser', 'tstamp', 'crdate'];
+            $colNamesArray = ['pid', 'news', 'feuser', 'news_datetime', 'tstamp', 'crdate'];
 
             $dbConnectionUnreadnews = $connectionPool->getConnectionForTable('tx_mdunreadnews_domain_model_unreadnews');
             $dbConnectionUnreadnews->bulkInsert(

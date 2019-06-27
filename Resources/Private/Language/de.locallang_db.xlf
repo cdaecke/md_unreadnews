@@ -11,6 +11,10 @@
                 <source>News</source>
                 <target>News</target>
             </trans-unit>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.news_datetime">
+                <source>Date of news entry</source>
+                <target>Datum des Newsbeitrags</target>
+            </trans-unit>
             <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.feuser">
                 <source>Feuser</source>
                 <target>Feuser</target>

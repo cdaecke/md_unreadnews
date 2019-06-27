@@ -11,6 +11,7 @@ return [
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
+        'default_sortby' => 'ORDER BY news_datetime DESC',
         'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
@@ -20,10 +21,10 @@ return [
         'iconfile' => 'EXT:md_unreadnews/Resources/Public/Icons/user_plugin_unread.svg'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, news, feuser',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, news, news_datetime, feuser',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, news, feuser, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, news, news_datetime, feuser, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -161,6 +162,18 @@ return [
                 'default' => 0,
                 'eval' => 'trim,int,required'
             ]
-        ],    
+        ],
+
+        'news_datetime' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:md_unreadnews/Resources/Private/Language/locallang_db.xlf:tx_mdunreadnews_domain_model_unreadnews.news_datetime',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'size' => 16,
+                'readOnly' => true,
+                'eval' => 'datetime,int',
+            ]
+        ],
     ],
 ];
