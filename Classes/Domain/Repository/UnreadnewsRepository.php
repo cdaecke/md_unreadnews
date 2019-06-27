@@ -30,8 +30,8 @@ class UnreadnewsRepository extends AbstractRepository
     public function isUnread(int $newsUid, int $feuserUid)
     {
         $query = $this->createQuery();
-        $constraints[] = $query->equals('news_uid', $newsUid);
-        $constraints[] = $query->equals('feuser_uid', $feuserUid);
+        $constraints[] = $query->equals('news', $newsUid);
+        $constraints[] = $query->equals('feuser', $feuserUid);
 
         $query->matching($query->logicalAnd($constraints));
         return $query->execute()->count();
@@ -52,8 +52,8 @@ class UnreadnewsRepository extends AbstractRepository
             ->getConnectionForTable($table);
 
         $arrayWhere = [
-            'news_uid' => $newsUid, 
-            'feuser_uid' => $feuserUid,
+            'news' => $newsUid, 
+            'feuser' => $feuserUid,
         ];
 
         $databaseConnection->delete($table, $arrayWhere);
@@ -75,9 +75,9 @@ class UnreadnewsRepository extends AbstractRepository
             FROM sys_category_record_mm
             JOIN 
                 tx_mdunreadnews_domain_model_unreadnews 
-                ON tx_mdunreadnews_domain_model_unreadnews.news_uid = sys_category_record_mm.uid_foreign
+                ON tx_mdunreadnews_domain_model_unreadnews.news = sys_category_record_mm.uid_foreign
             WHERE 
-                tx_mdunreadnews_domain_model_unreadnews.feuser_uid = '.$feuserUid.'
+                tx_mdunreadnews_domain_model_unreadnews.feuser = '.$feuserUid.'
                 AND sys_category_record_mm.uid_local = '.$categoryUid.'
                 AND sys_category_record_mm.tablenames = "tx_news_domain_model_news"
                 AND sys_category_record_mm.fieldname = "categories"

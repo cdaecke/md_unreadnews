@@ -6,8 +6,8 @@ CREATE TABLE tx_mdunreadnews_domain_model_unreadnews (
     uid int(11) NOT NULL auto_increment,
     pid int(11) DEFAULT '0' NOT NULL,
 
-    news_uid int(11) DEFAULT '0' NOT NULL,
-    feuser_uid int(11) DEFAULT '0' NOT NULL,
+    news int(11) DEFAULT '0' NOT NULL,
+    feuser int(11) DEFAULT '0' NOT NULL,
 
     tstamp int(11) unsigned DEFAULT '0' NOT NULL,
     crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE tx_mdunreadnews_domain_model_unreadnews (
     l10n_state text,
 
     PRIMARY KEY (uid),
-    KEY ids (news_uid, feuser_uid),
+    KEY ids (news, feuser),
     KEY parent (pid),
     KEY t3ver_oid (t3ver_oid,t3ver_wsid),
     KEY language (l10n_parent,sys_language_uid)

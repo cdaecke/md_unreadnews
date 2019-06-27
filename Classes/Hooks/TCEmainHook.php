@@ -135,14 +135,14 @@ class TCEmainHook
             foreach ($feuserData as $data) {
                 $dataArray[] = [
                     'pid' => !empty($typoscriptSettings['storagePid'])? trim($typoscriptSettings['storagePid']):0,
-                    'news_uid' => $newsUid,
-                    'feuser_uid' => $data['uid'],
+                    'news' => $newsUid,
+                    'feuser' => $data['uid'],
                     'tstamp' =>  $timestamp,
                     'crdate' => $timestamp,
                 ];
             }
             
-            $colNamesArray = ['news_uid', 'feuser_uid', 'tstamp', 'crdate'];
+            $colNamesArray = ['news', 'feuser', 'tstamp', 'crdate'];
 
             $dbConnectionUnreadnews = $connectionPool->getConnectionForTable('tx_mdunreadnews_domain_model_unreadnews');
             $dbConnectionUnreadnews->bulkInsert(

@@ -2,7 +2,7 @@
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:md_unreadnews/Resources/Private/Language/locallang_db.xlf:tx_mdunreadnews_domain_model_unreadnews',
-        'label' => 'news_uid',
+        'label' => 'news',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -16,14 +16,14 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'news_uid,feuser_uid',
+        'searchFields' => 'news,feuser',
         'iconfile' => 'EXT:md_unreadnews/Resources/Public/Icons/user_plugin_unread.svg'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, news_uid, feuser_uid',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, news, feuser',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, news_uid, feuser_uid, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, news, feuser, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -115,9 +115,9 @@ return [
             ],
         ],
 
-        'news_uid' => [
+        'news' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:md_unreadnews/Resources/Private/Language/locallang_db.xlf:tx_mdunreadnews_domain_model_unreadnews.news_uid',
+            'label' => 'LLL:EXT:md_unreadnews/Resources/Private/Language/locallang_db.xlf:tx_mdunreadnews_domain_model_unreadnews.news',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -139,9 +139,9 @@ return [
             ],
         ],
 
-        'feuser_uid' => [
+        'feuser' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:md_unreadnews/Resources/Private/Language/locallang_db.xlf:tx_mdunreadnews_domain_model_unreadnews.feuser_uid',
+            'label' => 'LLL:EXT:md_unreadnews/Resources/Private/Language/locallang_db.xlf:tx_mdunreadnews_domain_model_unreadnews.feuser',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',

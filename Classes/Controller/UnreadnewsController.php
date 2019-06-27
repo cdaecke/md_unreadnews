@@ -46,7 +46,7 @@ class UnreadnewsController extends BaseController
     {
         $unreadnews = $this
                       ->unreadnewsRepository
-                      ->findByFeuserUid($this->loggedinUserUid)
+                      ->findByFeuser($this->loggedinUserUid)
                       ->count();
 
         $this->view->assign('unreadnews', $unreadnews);

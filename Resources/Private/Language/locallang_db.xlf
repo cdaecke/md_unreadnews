@@ -6,11 +6,11 @@
             <trans-unit id="tx_mdunreadnews_domain_model_unreadnews">
                 <source>Unreadnews</source>
             </trans-unit>
-            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.news_uid">
-                <source>News Uid</source>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.news">
+                <source>News</source>
             </trans-unit>
-            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.feuser_uid">
-                <source>Feuser Uid</source>
+            <trans-unit id="tx_mdunreadnews_domain_model_unreadnews.feuser">
+                <source>Feuser</source>
             </trans-unit>
             <trans-unit id="tx_md_unreadnews_unread.name">
                 <source>Unread News</source>

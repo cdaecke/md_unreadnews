@@ -18,62 +18,62 @@ namespace Mediadreams\MdUnreadnews\Domain\Model;
 class Unreadnews extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
-     * The uid of the news entry.
+     * The news entry.
      *
      * @var \GeorgRinger\News\Domain\Model\News
      * @lazy
      * @validate NotEmpty
      */
-    protected $newsUid = 0;
+    protected $news = 0;
 
     /**
-     * The uid of the feuser entry.
+     * The feuser entry.
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      * @lazy
      * @validate NotEmpty
      */
-    protected $feuserUid = 0;
+    protected $feuser = 0;
 
     /**
-     * Returns the newsUid
+     * Returns the news
      *
-     * @return int $newsUid
+     * @return int $news
      */
-    public function getNewsUid()
+    public function getNews()
     {
-        return $this->newsUid;
+        return $this->news;
     }
 
     /**
-     * Sets the newsUid
+     * Sets the news
      *
-     * @param int $newsUid
+     * @param int $news
      * @return void
      */
-    public function setNewsUid($newsUid)
+    public function setNews($news)
     {
-        $this->newsUid = $newsUid;
+        $this->news= $news;
     }
 
     /**
-     * Returns the feuserUid
+     * Returns the feuser
      *
-     * @return int $feuserUid
+     * @return int $feuser
      */
-    public function getFeuserUid()
+    public function getFeuser()
     {
-        return $this->feuserUid;
+        return $this->feuser;
     }
 
     /**
-     * Sets the feuserUid
+     * Sets the feuser
      *
-     * @param int $feuserUid
+     * @param int $feuser
      * @return void
      */
-    public function setFeuserUid($feuserUid)
+    public function setFeuser($feuser)
     {
-        $this->feuserUid = $feuserUid;
+        $this->feuser = $feuser;
     }
 }
