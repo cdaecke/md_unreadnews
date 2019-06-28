@@ -50,47 +50,51 @@ class TCEmainHook
     )
     {
 
-        if ($table === self::TABLE && $action == 'new') {
-            // get uid of new record
-            $newsUid = $pObj->substNEWwithIDs[$recordUid];
+        if ($table === self::TABLE) {
+            if ($action == 'new') {
+                // get uid of new record
+                $newsUid = $pObj->substNEWwithIDs[$recordUid];
 
-            if (!$newsUid) {
-                /** @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
-                $flashMessage = GeneralUtility::makeInstance(
-                    \TYPO3\CMS\Core\Messaging\FlashMessage::class,
-                    'Unread info for news could not be saved!',
-                    'EXT:md_unreadnews',
-                    \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING,
-                    true
-                );
-                
-                /** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-                $flashMessageService = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Messaging\FlashMessageService::class);
-                /** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
-                $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
-                $defaultFlashMessageQueue->enqueue($flashMessage);
+                if (!$newsUid) {
+                    /** @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
+                    $flashMessage = GeneralUtility::makeInstance(
+                        \TYPO3\CMS\Core\Messaging\FlashMessage::class,
+                        'Unread info for news could not be saved!',
+                        'EXT:md_unreadnews',
+                        \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING,
+                        true
+                    );
+                    
+                    /** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
+                    $flashMessageService = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Messaging\FlashMessageService::class);
+                    /** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
+                    $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+                    $defaultFlashMessageQueue->enqueue($flashMessage);
 
-                return;
-            }
+                    return;
+                }
 
-            $typoscriptSettings = $this->getTyposcriptSettings();
-            $allowedCategories = GeneralUtility::trimExplode(',', $typoscriptSettings['categories'], true);
+                $typoscriptSettings = $this->getTyposcriptSettings();
+                $allowedCategories = GeneralUtility::trimExplode(',', $typoscriptSettings['categories'], true);
 
-            // if there are categories configured in typoscript
-            if (count($allowedCategories) > 0) {
-                // get selected categories in news record
-                $categories = GeneralUtility::trimExplode(',', $pObj->checkValue_currentRecord['categories'], true);
+                // if there are categories configured in typoscript
+                if (count($allowedCategories) > 0) {
+                    // get selected categories in news record
+                    $categories = GeneralUtility::trimExplode(',', $pObj->checkValue_currentRecord['categories'], true);
 
-                // check, if category in news record is a category which is configured in typoscript
-                $matchedCategories = array_intersect($allowedCategories, $categories);
+                    // check, if category in news record is a category which is configured in typoscript
+                    $matchedCategories = array_intersect($allowedCategories, $categories);
 
-                // if $matchedCategories has at least one matched element, add unread info
-                if (count($matchedCategories) > 0) {
-                    // add unread data
+                    // if $matchedCategories has at least one matched element, add unread info
+                    if (count($matchedCategories) > 0) {
+                        // add unread data
+                        $this->saveUnreadInfo($newsUid, $fieldArray, $typoscriptSettings);
+                    }
+                } else { // if no categories configured in typoscript, add always unread info
                     $this->saveUnreadInfo($newsUid, $fieldArray, $typoscriptSettings);
                 }
-            } else { // if no categories configured in typoscript, add always unread info
-                $this->saveUnreadInfo($newsUid, $fieldArray, $typoscriptSettings);
+            } else if ($action == 'update') {
+                $this->updateUnreadInfo($recordUid, $fieldArray);
             }
         }
     }
@@ -156,6 +160,44 @@ class TCEmainHook
                 $colNamesArray
             );
         }
+    }
+
+    /**
+     * Update unread info for news record
+     *
+     * @param int $newsUid Uid of news record
+     * @param array $fieldArray Data of news entry
+     * @return void
+     */
+    private function updateUnreadInfo(int $newsUid, $fieldArray)
+    {
+        $databaseConnection = GeneralUtility::makeInstance(ConnectionPool::class)
+                              ->getConnectionForTable('tx_mdunreadnews_domain_model_unreadnews');
+        
+        // build update information
+        $arrayUpdateData = ['tstamp' => time()];
+        if (isset($fieldArray['datetime'])) {
+            $arrayUpdateData = array_merge($arrayUpdateData, ['news_datetime' => $fieldArray['datetime']]);
+        }
+
+        if (isset($fieldArray['hidden'])) {
+            $arrayUpdateData = array_merge($arrayUpdateData, ['hidden' => $fieldArray['hidden']]);
+        }
+
+        if (isset($fieldArray['starttime'])) {
+            $arrayUpdateData = array_merge($arrayUpdateData, ['starttime' => $fieldArray['starttime']]);
+        }
+
+        if (isset($fieldArray['endtime'])) {
+            $arrayUpdateData = array_merge($arrayUpdateData, ['endtime' => $fieldArray['endtime']]);
+        }
+
+        // update all unread records with new information
+        $databaseConnection->update(
+            'tx_mdunreadnews_domain_model_unreadnews',
+            $arrayUpdateData,
+            ['news' => $newsUid]
+        );
     }
 
     /**
