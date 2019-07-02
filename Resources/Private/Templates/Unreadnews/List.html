@@ -8,10 +8,10 @@
                     <f:for each="{paginatedNews}" as="unreadnewsItem" iteration="i">
                         <f:if condition="{settings.singlePid}">
                             <f:then>
-                                <f:render partial="Unread/ListItem" arguments="{unreadnewsItem: unreadnewsItem, singlePid: settings.singlePid, settings: settings}" />
+                                <f:render partial="Unreadnews/ListItem" arguments="{unreadnewsItem: unreadnewsItem, singlePid: settings.singlePid, settings: settings}" />
                             </f:then>
                             <f:else>
-                                <f:render partial="Unread/ListItem" arguments="{unreadnewsItem: unreadnewsItem, singlePid: unreadnewsItem.news.firstCategory.singlePid, settings: settings}" />
+                                <f:render partial="Unreadnews/ListItem" arguments="{unreadnewsItem: unreadnewsItem, singlePid: unreadnewsItem.news.firstCategory.singlePid, settings: settings}" />
                             </f:else>
                         </f:if>
                     </f:for>
