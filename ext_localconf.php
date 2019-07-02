@@ -29,7 +29,12 @@ call_user_func(
             ['SC_OPTIONS']
             ['t3lib/class.t3lib_tcemain.php']
             ['processDatamapClass']
-            ['md_unreadnews'] = 'Mediadreams\\MdUnreadnews\\Hooks\\TCEmainHook';
+            ['md_unreadnews'] = \Mediadreams\MdUnreadnews\Hooks\TCEmainHook::class;
 
+        $GLOBALS['TYPO3_CONF_VARS']
+            ['SC_OPTIONS']
+            ['t3lib/class.t3lib_tcemain.php']
+            ['processCmdmapClass']
+            ['md_unreadnews_delete'] = \Mediadreams\MdUnreadnews\Hooks\TCEmainHook::class;
     }
 );

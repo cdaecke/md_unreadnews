@@ -100,6 +100,35 @@ class TCEmainHook
     }
 
     /**
+     * Delete unread information if news record gets deleted
+     *
+     * @param string $action action
+     * @param string $table table name
+     * @param int $recordUid id of the record
+     * @param array $fields fieldArray
+     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj parent Object
+     */
+    public function processCmdmap_postProcess(
+        $action, 
+        $table, 
+        int $recordUid, 
+        $value, 
+        \TYPO3\CMS\Core\DataHandling\DataHandler &$pObj
+    )
+    {
+        if ($table === self::TABLE && $action == 'delete') {
+            $databaseConnection = GeneralUtility::makeInstance(ConnectionPool::class)
+                                  ->getConnectionForTable('tx_mdunreadnews_domain_model_unreadnews');
+
+            $databaseConnection->delete(
+                'tx_mdunreadnews_domain_model_unreadnews', 
+                ['news' => $recordUid]
+            );
+        }
+    }
+    
+
+    /**
      * Save unread info for news record
      *
      * @param int $newsUid Uid of news record
