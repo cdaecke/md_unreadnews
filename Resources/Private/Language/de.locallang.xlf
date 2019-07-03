@@ -30,6 +30,11 @@
                 <target>Ungelesene Nachrichten</target>
             </trans-unit>
 
+            <trans-unit id="dateFormat">
+                <source>%m/%d/%Y</source>
+                <target>%d.%m.%Y</target>
+            </trans-unit>
+
             <trans-unit id="template.unread">
                 <source>Unread</source>
                 <target>Ungelesen</target>

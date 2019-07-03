@@ -1,7 +1,43 @@
 <html xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-    <f:link.page pageUid="{singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}">
-        <div class="row mb-5 {f:if(condition:'{i.isEven}',then:'even',else:'odd')}">
-            <div class="col-sm-4">
+    <f:switch expression="{unreadnewsItem.news.type}">
+        <f:case value="1">
+            <f:comment>*** internal link ***</f:comment>
+            <f:link.typolink parameter="{unreadnewsItem.news.internalurl}">
+                <f:render section="NewsItem" arguments="{_all}" />
+            </f:link.typolink>
+        </f:case>
+        <f:case value="2">
+            <f:comment>*** external link ***</f:comment>
+            <f:link.typolink parameter="{unreadnewsItem.news.externalurl}" target="_blank">
+                <f:render section="NewsItem" arguments="{_all}" />
+            </f:link.typolink>
+        </f:case>
+        <f:defaultCase>
+            <f:comment>*** normal news record ***</f:comment>
+            <f:link.page pageUid="{singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}">
+                <f:render section="DefaultNews" arguments="{_all}" />
+            </f:link.page>
+        </f:defaultCase>
+    </f:switch>
+
+    <f:section name="DefaultNews">
+        <f:if condition="{settings.singlePid}">
+            <f:then>
+                <f:link.page pageUid="{settings.singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}">
+                    <f:render section="NewsItem" arguments="{_all}" />
+                </f:link.page>
+            </f:then>
+            <f:else>
+                <f:link.page pageUid="{unreadnewsItem.news.firstCategory.singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}">
+                    <f:render section="NewsItem" arguments="{_all}" />
+                </f:link.page>
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="NewsItem">
+        <div class="row mb-5 article articletype-{unreadnewsItem.news.type}{f:if(condition: unreadnewsItem.news.istopnews, then: ' topnews')} {f:if(condition:'{i.isEven}',then:'even',else:'odd')}" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="col-sm-3">
                 <f:if condition="{unreadnewsItem.news.mediaPreviews}">
                     <f:then>
                         <div class="news-img-wrap">
@@ -41,8 +77,15 @@
                     </f:else>
                 </f:if>
             </div>
-            <div class="teaser-text col-sm-8">
-                <h3>{unreadnewsItem.news.title}</h3>
+            <div class="teaser-text col-sm-9">
+                <div class="news-list-date">
+                    <time itemprop="datePublished" datetime="{f:format.date(date:unreadnewsItem.news.datetime, format:'Y-m-d')}">
+                        <f:format.date format="{f:translate(key:'dateFormat')}">{unreadnewsItem.news.datetime}</f:format.date>
+                    </time>
+                </div>
+
+                <h3 itemprop="headline">{unreadnewsItem.news.title}</h3>
+                
                 <f:if condition="{unreadnewsItem.news.teaser}">
                     <f:then>
                         <div itemprop="description">{unreadnewsItem.news.teaser -> f:format.html()}</div>
@@ -53,5 +96,5 @@
                 </f:if>
             </div>
         </div>
-    </f:link.page>
+    </f:section>
 </html>

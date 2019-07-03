@@ -24,6 +24,10 @@
                 <source>Unread News</source>
             </trans-unit>
 
+            <trans-unit id="dateFormat">
+                <source>%m/%d/%Y</source>
+            </trans-unit>
+
             <trans-unit id="template.unread">
                 <source>Unread</source>
             </trans-unit>
