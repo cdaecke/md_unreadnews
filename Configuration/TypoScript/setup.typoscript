@@ -1,17 +1,31 @@
 
 plugin.tx_mdunreadnews_unread {
+    mvc.callDefaultActionIfActionCantBeResolved = 1
+
     view {
-        templateRootPaths.0 = EXT:md_unreadnews/Resources/Private/Templates/
-        templateRootPaths.1 = {$plugin.tx_mdunreadnews_unread.view.templateRootPath}
-        partialRootPaths.0 = EXT:md_unreadnews/Resources/Private/Partials/
-        partialRootPaths.1 = {$plugin.tx_mdunreadnews_unread.view.partialRootPath}
-        layoutRootPaths.0 = EXT:md_unreadnews/Resources/Private/Layouts/
-        layoutRootPaths.1 = {$plugin.tx_mdunreadnews_unread.view.layoutRootPath}
+        templateRootPaths {
+            0 = EXT:md_unreadnews/Resources/Private/Templates/
+            1 = {$plugin.tx_mdunreadnews_unread.view.templateRootPath}
+        }
+        
+        partialRootPaths {
+            0 = EXT:md_unreadnews/Resources/Private/Partials/
+            1 = {$plugin.tx_mdunreadnews_unread.view.partialRootPath}
+        }
+        
+        layoutRootPaths {
+            0 = EXT:md_unreadnews/Resources/Private/Layouts/
+            1 = {$plugin.tx_mdunreadnews_unread.view.layoutRootPath}
+        }
+
+        widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = EXT:md_unreadnews/Resources/Private/Templates/
     }
+
     persistence {
         storagePid = {$plugin.tx_mdunreadnews_unread.persistence.storagePid}
         #recursive = 1
     }
+
     features {
         #skipDefaultArguments = 1
         # if set to 1, the enable fields are ignored in BE context
@@ -19,6 +33,7 @@ plugin.tx_mdunreadnews_unread {
         # Should be on by default, but can be disabled if all action in the plugin are uncached
         requireCHashArgumentForActionArguments = 1
     }
+    
     mvc {
         #callDefaultActionIfActionCantBeResolved = 1
     }
