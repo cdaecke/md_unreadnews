@@ -12,7 +12,7 @@ call_user_func(
             ],
             // non-cacheable actions
             [
-                'Unreadnews' => 'isUnread, allUnreadCount, categoryCount, removeUnread'
+                'Unreadnews' => 'list, isUnread, allUnreadCount, categoryCount, removeUnread'
             ]
         );
 
