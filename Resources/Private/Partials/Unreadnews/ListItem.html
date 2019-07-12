@@ -2,33 +2,31 @@
     <f:switch expression="{unreadnewsItem.news.type}">
         <f:case value="1">
             <f:comment>*** internal link ***</f:comment>
-            <f:link.typolink parameter="{unreadnewsItem.news.internalurl}">
+            <f:link.typolink parameter="{unreadnewsItem.news.internalurl}" class="more-link remove-unread" additionalAttributes="{'data-uid':'{unreadnewsItem.news.uid}'}">
                 <f:render section="NewsItem" arguments="{_all}" />
             </f:link.typolink>
         </f:case>
         <f:case value="2">
             <f:comment>*** external link ***</f:comment>
-            <f:link.typolink parameter="{unreadnewsItem.news.externalurl}" target="_blank">
+            <f:link.typolink parameter="{unreadnewsItem.news.externalurl}" class="more-link remove-unread" target="_blank" additionalAttributes="{'data-uid':'{unreadnewsItem.news.uid}'}">
                 <f:render section="NewsItem" arguments="{_all}" />
             </f:link.typolink>
         </f:case>
         <f:defaultCase>
             <f:comment>*** normal news record ***</f:comment>
-            <f:link.page pageUid="{singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}">
-                <f:render section="DefaultNews" arguments="{_all}" />
-            </f:link.page>
+            <f:render section="DefaultNews" arguments="{_all}" />
         </f:defaultCase>
     </f:switch>
 
     <f:section name="DefaultNews">
         <f:if condition="{settings.singlePid}">
             <f:then>
-                <f:link.page pageUid="{settings.singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}">
+                <f:link.page pageUid="{settings.singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}" class="more-link">
                     <f:render section="NewsItem" arguments="{_all}" />
                 </f:link.page>
             </f:then>
             <f:else>
-                <f:link.page pageUid="{unreadnewsItem.news.firstCategory.singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}">
+                <f:link.page pageUid="{unreadnewsItem.news.firstCategory.singlePid}" additionalParams="{tx_news_pi1: '{news:unreadnewsItem.news.uid, controller:\'News\', action:\'detail\'}'}" class="more-link">
                     <f:render section="NewsItem" arguments="{_all}" />
                 </f:link.page>
             </f:else>

@@ -9,6 +9,27 @@
                         <f:render partial="Unreadnews/ListItem" arguments="{unreadnewsItem: unreadnewsItem, settings: settings}" />
                     </f:for>
                 </f:widget.paginate>
+
+                <script type="text/javascript">
+                    (function($){
+                        // Remove unread information for news record
+                        $('.remove-unread').click(function(e) {
+                            var href = this.href,
+                                hrefAjax = '/index.php?type=120719&newsUid='+$(this).data('uid'),
+                                target = $(this).attr('target');
+
+                            // if link is not opened in new window, call ajax and then follow link!
+                            if (target != '_blank') {
+                                e.preventDefault();
+                                $.get(hrefAjax, function( data ) {
+                                    window.location = href;
+                                });
+                            } else {
+                                $.get(hrefAjax);
+                            }
+                        });
+                    })(jQuery);
+                </script>
             </f:then>
             <f:else>
                 <div class="no-news-found">

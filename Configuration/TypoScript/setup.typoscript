@@ -74,6 +74,45 @@ plugin.tx_mdunreadnews_unread {
 }
 
 /**
+ * used for ajax call to remove unread information
+ *
+ */
+PAGE_REMOVE_UNREAD_NEWS = PAGE
+PAGE_REMOVE_UNREAD_NEWS {
+    typeNum = 120719
+
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/html
+        xhtml_cleaning = 0
+        debug = 0
+        admPanel = 0
+    }
+
+    10 = USER_INT
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = MdUnreadnews
+        pluginName = Unread
+        vendorName = Mediadreams
+
+        switchableControllerActions {
+            Unreadnews {
+                1 = removeUnread
+            }
+        }
+
+        settings {
+            useStdWrap := addToList(newsUid)
+
+            newsUid = TEXT
+            newsUid.data = GP:newsUid
+        }
+    }
+}
+
+
+/**
  * This lib can be used to show unread information of a news record
  * Use following code in your fluid template
  * <f:cObject typoscriptObjectPath="lib.mdIsUnread" data="{newsUid:'{newsItem.uid}'}" />
