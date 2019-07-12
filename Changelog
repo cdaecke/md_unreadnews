@@ -1,0 +1,17 @@
+Version 2.0.0 (2019-07-12)
+    FEATURE: add "lib.mdAllUnreadCount" which adds a counter for all unread news per user
+    FEATURE: add plugin to show a list of unread news
+    FEATURE: update unread info, if news records gets updated
+    FEATURE: delete unread information if news record gets deleted
+
+    Update procedure:
+    Please run following SQL queries right after updating the extension:
+
+    ALTER TABLE `tx_mdunreadnews_domain_model_unreadnews` DROP INDEX `ids`;
+    ALTER TABLE `tx_mdunreadnews_domain_model_unreadnews` CHANGE `news_uid` `news` INT(11) NOT NULL DEFAULT '0';
+    ALTER TABLE `tx_mdunreadnews_domain_model_unreadnews` CHANGE `feuser_uid` `feuser` INT(11) NOT NULL DEFAULT '0';
+
+    Go to install tool and run "Database analyzer" to finish the update
+
+    All changes
+    https://github.com/cdaecke/md_unreadnews/compare/1.0.0...2.0.0
