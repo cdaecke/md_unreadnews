@@ -24,7 +24,17 @@ Available constants:
 
 ## Usage
 
-As soon as you have installed and activated the extension, it will hook into the saving process of new news records. Everytime a backend user adds a new records, the unread info for this record and the configured feUsers will be added.
+As soon as you have installed and activated the extension, it will hook into the saving process of new news records. Everytime a backend user adds a new record, the unread info for this record and the configured feUsers will be added.
+
+### List plugin
+
+The extension ships a plugin, which shows a list of all unread news for a user. In the ``Plugin Options`` you can set the link to the detail page. If you do not provide the detail page, the news record will be linked to the page of the first attached category.
+
+### Show general unread counter
+
+This counter will show the number of unread items for a user. To show this information use the following code in your fluid template:
+
+    <f:cObject typoscriptObjectPath="lib.mdAllUnreadCount" />
 
 ### Show unread info in list view
 
