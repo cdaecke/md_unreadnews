@@ -34,7 +34,6 @@
         }
     },
     "replace": {
-        "md_unreadnews": "self.version",
-        "typo3-ter/md-unreadnews": "self.version"
+        "typo3-ter/md_unreadnews": "self.version"
     }
 }
