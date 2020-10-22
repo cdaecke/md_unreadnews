@@ -12,6 +12,7 @@ namespace Mediadreams\MdUnreadnews\Controller;
  *
  */
 
+use Mediadreams\MdUnreadnews\Domain\Repository\UnreadnewsRepository;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -23,10 +24,17 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * unreadnewsRepository
      *
-     * @var \Mediadreams\MdUnreadnews\Domain\Repository\UnreadnewsRepository
-     * @inject
+     * @var UnreadnewsRepository
      */
     protected $unreadnewsRepository = null;
+
+    /**
+     * @param UnreadnewsRepository $unreadnewsRepository
+     */
+    public function injectUnreadnewsRepository(UnreadnewsRepository $unreadnewsRepository)
+    {
+        $this->unreadnewsRepository = $unreadnewsRepository;
+    }
 
     /**
      * Initialize actions
