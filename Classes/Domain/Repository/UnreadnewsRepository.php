@@ -27,7 +27,7 @@ class UnreadnewsRepository extends AbstractRepository
      * @param  int $feuserUid: Uid of feuser record
      * @return int
      */
-    public function isUnread(int $newsUid, int $feuserUid)
+    public function isUnread(int $newsUid, int $feuserUid): int
     {
         $query = $this->createQuery();
         $constraints[] = $query->equals('news', $newsUid);
@@ -44,7 +44,7 @@ class UnreadnewsRepository extends AbstractRepository
      * @param  int $feuserUid: Uid of feuser record
      * @return void
      */
-    public function deleteEntry(int $newsUid, int $feuserUid)
+    public function deleteEntry(int $newsUid, int $feuserUid): void
     {
         $table = 'tx_mdunreadnews_domain_model_unreadnews';
 
@@ -66,7 +66,7 @@ class UnreadnewsRepository extends AbstractRepository
      * @param  int $feuserUid: Uid of feuser record
      * @return int
      */
-    public function getCountForCategory(int $categoryUid, int $feuserUid)
+    public function getCountForCategory(int $categoryUid, int $feuserUid): int
     {
         $query = $this->createQuery();
         $enableFields = $GLOBALS['TSFE']->sys_page->enableFields('tx_mdunreadnews_domain_model_unreadnews');
