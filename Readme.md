@@ -6,12 +6,16 @@ The extension is shipped with typoscript libraries, which can be included at des
 
 ## Requirements
 
-- TYPO3 >= 8.7
-- ext:news >= 6.0
+- TYPO3 >= 9.5
+- ext:news >= 7.0
+
+## Screenshots
+
+![Screenshot list](./Documentation/Images/list_view.png?raw=true "List view")
 
 ## Installation
 
-- Install the extension by using the extension manager
+- Install the extension by using the extension manager or use composer
 - Include the static TypoScript of the extension
 - Configure the extension by setting your own constants
 
@@ -84,6 +88,17 @@ Copy ``ext:news/Ressources/Private/Templates/News/Detail.html`` into your extens
         </f:then>
     </f:if>
 
+### Cleanup task
+
+This extension ships a scheduler task, which allows you to remove unread information, 
+which is older than a certain period of days. Activate this job, by following these steps:
+
+- Switch to module `Scheduler`
+- Add a new task and choose in the select field `Class` the option `Execute console commands`
+- Fill all fields like you need them and use `mdUnreadnews:cleanup: Remove old unread information` in the field `Schedulable Command.`
+- After saving the task, you will be able to fill the field 
+`Argument: days. Amount of days in the past till then all unread information shall be deleted. (integer)`.
+Enter the days how long you want to keep the unread information. Default is 30 days.
 
 ## Bugs and Known Issues
 If you find a bug, it would be nice if you add an issue on [Github](https://github.com/cdaecke/md_unreadnews/issues).
