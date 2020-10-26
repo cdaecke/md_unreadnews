@@ -21,6 +21,11 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 class UnreadnewsRepository extends AbstractRepository
 {
     /**
+     * The name of the unread table in the database
+     */
+    const TABLE_NAME = 'tx_mdunreadnews_domain_model_unreadnews';
+
+    /**
      * Check if news is unread for given user
      *
      * @param  int $newsUid: Uid of news record
@@ -38,7 +43,7 @@ class UnreadnewsRepository extends AbstractRepository
     }
 
     /**
-     * Delete entry for given news and unser
+     * Delete entry for given news and user
      *
      * @param  int $newsUid: Uid of news record
      * @param  int $feuserUid: Uid of feuser record
@@ -46,17 +51,36 @@ class UnreadnewsRepository extends AbstractRepository
      */
     public function deleteEntry(int $newsUid, int $feuserUid): void
     {
-        $table = 'tx_mdunreadnews_domain_model_unreadnews';
-
         $databaseConnection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable($table);
+            ->getConnectionForTable(static::TABLE_NAME);
 
         $arrayWhere = [
             'news' => $newsUid, 
             'feuser' => $feuserUid,
         ];
 
-        $databaseConnection->delete($table, $arrayWhere);
+        $databaseConnection->delete(static::TABLE_NAME, $arrayWhere);
+    }
+
+    /**
+     * Delete entries older than the given days
+     *
+     * @param  int $days: Amount of days in the past till then all unread information shall be deleted.
+     * @return mixed
+     */
+    public function deletePeriod(int $days)
+    {
+        $date = strtotime(-$days.' days');
+
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable(static::TABLE_NAME);
+
+        return $queryBuilder
+            ->delete(static::TABLE_NAME)
+            ->where(
+                $queryBuilder->expr()->lte('crdate', $queryBuilder->createNamedParameter($date))
+            )
+            ->execute();
     }
 
     /**
