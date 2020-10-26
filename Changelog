@@ -1,3 +1,10 @@
+Version 3.0.0 (2020-10-26)
+    TYPO3 10 compatibility
+    FEATURE: add scheduler task to automatically remove unread information
+
+    All changes
+    https://github.com/cdaecke/md_unreadnews/compare/2.0.0...3.0.0
+
 Version 2.0.0 (2019-07-12)
     FEATURE: add "lib.mdAllUnreadCount" which adds a counter for all unread news per user
     FEATURE: add plugin to show a list of unread news
