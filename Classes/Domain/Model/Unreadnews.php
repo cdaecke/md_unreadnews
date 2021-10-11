@@ -23,7 +23,6 @@ class Unreadnews extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * The news entry.
      *
      * @var \GeorgRinger\News\Domain\Model\News
-     * @Extbase\ORM\Lazy
      * @Extbase\Validate("NotEmpty")
      */
     protected $news = 0;
@@ -32,7 +31,6 @@ class Unreadnews extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * The feuser entry.
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
-     * @Extbase\ORM\Lazy
      * @Extbase\Validate("NotEmpty")
      */
     protected $feuser = 0;
