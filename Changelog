@@ -1,3 +1,9 @@
+Version 3.0.1 (2021-10-11)
+    BUGFIX: remove lazy loading for news and fe_user in order to get data in list view straight away
+
+    All changes
+    https://github.com/cdaecke/md_unreadnews/compare/3.0.0...3.0.1
+
 Version 3.0.0 (2020-10-26)
     TYPO3 10 compatibility
     FEATURE: add scheduler task to automatically remove unread information

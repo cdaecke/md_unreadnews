@@ -2,7 +2,7 @@
     "name": "mediadreams/md_unreadnews",
     "type": "typo3-cms-extension",
     "description": "This TYPO3 extension adds unread information to the records of ext:news for frontend users.",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "license": "GPL-2.0+",
     "keywords": [
         "typo3",
