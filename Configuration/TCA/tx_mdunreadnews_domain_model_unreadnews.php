@@ -123,13 +123,11 @@ return [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_news_domain_model_news',
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                        'default' => [
-                            'searchWholePhrase' => true,
-                        ]
-                    ],
+                'suggestOptions' => [
+                    'type' => 'suggest',
+                    'default' => [
+                        'searchWholePhrase' => true,
+                    ]
                 ],
                 'size' => 1,
                 'minitems' => 0,
@@ -147,13 +145,11 @@ return [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'fe_users',
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                        'default' => [
-                            'searchWholePhrase' => true,
-                        ]
-                    ],
+                'suggestOptions' => [
+                    'type' => 'suggest',
+                    'default' => [
+                        'searchWholePhrase' => true,
+                    ]
                 ],
                 'size' => 1,
                 'minitems' => 0,
