@@ -6,7 +6,7 @@ The extension is shipped with typoscript libraries, which can be included at des
 
 ## Requirements
 
-- TYPO3 >= 9.5
+- TYPO3 >= 10.4
 - ext:news >= 7.0
 
 ## Screenshots
