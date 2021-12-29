@@ -67,7 +67,7 @@ plugin.tx_mdunreadnews_unread {
                 itemsPerPage = 10
                 insertAbove = 0
                 insertBelow = 1
-                maximumNumberOfLinks = 3
+                maximumNumberOfLinks = 6
             }
         }
     }

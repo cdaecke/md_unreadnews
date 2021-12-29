@@ -1,4 +1,5 @@
 <?php
+
 namespace Mediadreams\MdUnreadnews\Controller;
 
 /**
@@ -12,8 +13,10 @@ namespace Mediadreams\MdUnreadnews\Controller;
  *
  */
 
+
 /**
- * UnreadnewsController
+ * Class UnreadnewsController
+ * @package Mediadreams\MdUnreadnews\Controller
  */
 class UnreadnewsController extends BaseController
 {
@@ -27,7 +30,11 @@ class UnreadnewsController extends BaseController
         if (isset($this->loggedinUserUid)) {
             $unreadnews = $this->unreadnewsRepository->findByFeuser($this->loggedinUserUid);
 
-            $this->view->assign('unreadnews', $unreadnews);
+            $this->assignPagination(
+                $unreadnews,
+                $this->settings['list']['paginate']['itemsPerPage'],
+                $this->settings['list']['paginate']['maximumNumberOfLinks']
+            );
         }
     }
 
@@ -39,11 +46,11 @@ class UnreadnewsController extends BaseController
     public function isUnreadAction()
     {
         if (
-            (int)$this->settings['newsUid'] > 0 
+            (int)$this->settings['newsUid'] > 0
             && isset($this->loggedinUserUid)
         ) {
             $unreadnews = $this->unreadnewsRepository->isUnread(
-                $this->settings['newsUid'], 
+                $this->settings['newsUid'],
                 $this->loggedinUserUid
             );
 
@@ -59,9 +66,9 @@ class UnreadnewsController extends BaseController
     public function allUnreadCountAction()
     {
         $unreadnews = $this
-                      ->unreadnewsRepository
-                      ->findByFeuser($this->loggedinUserUid)
-                      ->count();
+            ->unreadnewsRepository
+            ->findByFeuser($this->loggedinUserUid)
+            ->count();
 
         $this->view->assign('unreadnews', $unreadnews);
     }
@@ -74,11 +81,11 @@ class UnreadnewsController extends BaseController
     public function categoryCountAction()
     {
         if (
-            (int)$this->settings['categoryUid'] > 0 
+            (int)$this->settings['categoryUid'] > 0
             && isset($this->loggedinUserUid)
         ) {
             $unreadnews = $this->unreadnewsRepository->getCountForCategory(
-                $this->settings['categoryUid'], 
+                $this->settings['categoryUid'],
                 $this->loggedinUserUid
             );
 
@@ -93,12 +100,12 @@ class UnreadnewsController extends BaseController
      */
     public function removeUnreadAction()
     {
-        if ( 
-            (int)$this->settings['newsUid'] > 0 
+        if (
+            (int)$this->settings['newsUid'] > 0
             && isset($this->loggedinUserUid)
         ) {
             $this->unreadnewsRepository->deleteEntry(
-                $this->settings['newsUid'], 
+                $this->settings['newsUid'],
                 $this->loggedinUserUid
             );
         }

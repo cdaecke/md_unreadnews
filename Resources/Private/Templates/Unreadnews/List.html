@@ -2,13 +2,19 @@
     <f:layout name="Default" />
 
     <f:section name="content">
-        <f:if condition="{unreadnews}">
+        <f:if condition="{pagination.paginator.paginatedItems}">
             <f:then>
-                <f:widget.paginate objects="{unreadnews}" as="paginatedNews" configuration="{itemsPerPage: settings.list.paginate.itemsPerPage, insertAbove: settings.list.paginate.insertAbove, insertBelow: settings.list.paginate.insertBelow, maximumNumberOfLinks: settings.list.paginate.maximumNumberOfLinks}">
-                    <f:for each="{paginatedNews}" as="unreadnewsItem" iteration="i">
-                        <f:render partial="Unreadnews/ListItem" arguments="{unreadnewsItem: unreadnewsItem, settings: settings}" />
-                    </f:for>
-                </f:widget.paginate>
+                <f:if condition="{settings.list.paginate.insertAbove}">
+                    <f:render partial="Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator}" />
+                </f:if>
+
+                <f:for each="{pagination.paginator.paginatedItems}" as="unreadnewsItem" iteration="i">
+                    <f:render partial="Unreadnews/ListItem" arguments="{unreadnewsItem: unreadnewsItem, settings: settings}" />
+                </f:for>
+
+                <f:if condition="{settings.list.paginate.insertBelow}">
+                    <f:render partial="Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator}" />
+                </f:if>
 
                 <script type="text/javascript">
                     (function($){
