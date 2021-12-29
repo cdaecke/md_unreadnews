@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Mediadreams\MdUnreadnews\:
+    resource: "../Classes/*"
+
+  Mediadreams\MdUnreadnews\Command\Cleanup:
+    tags:
+      - name: 'console.command'
+        command: 'mdUnreadnews:cleanup'
+        description: 'Remove old unread information from news records'
+        # not required, defaults to false
+        hidden: false

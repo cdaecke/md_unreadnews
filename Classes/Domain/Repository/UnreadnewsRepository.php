@@ -1,4 +1,5 @@
 <?php
+
 namespace Mediadreams\MdUnreadnews\Domain\Repository;
 
 /**
@@ -16,7 +17,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 
 /**
- * The repository for Unreadnews
+ * Class UnreadnewsRepository
+ * @package Mediadreams\MdUnreadnews\Domain\Repository
  */
 class UnreadnewsRepository extends AbstractRepository
 {
@@ -28,8 +30,8 @@ class UnreadnewsRepository extends AbstractRepository
     /**
      * Check if news is unread for given user
      *
-     * @param  int $newsUid: Uid of news record
-     * @param  int $feuserUid: Uid of feuser record
+     * @param int $newsUid : Uid of news record
+     * @param int $feuserUid : Uid of feuser record
      * @return int
      */
     public function isUnread(int $newsUid, int $feuserUid): int
@@ -45,8 +47,8 @@ class UnreadnewsRepository extends AbstractRepository
     /**
      * Delete entry for given news and user
      *
-     * @param  int $newsUid: Uid of news record
-     * @param  int $feuserUid: Uid of feuser record
+     * @param int $newsUid : Uid of news record
+     * @param int $feuserUid : Uid of feuser record
      * @return void
      */
     public function deleteEntry(int $newsUid, int $feuserUid): void
@@ -55,7 +57,7 @@ class UnreadnewsRepository extends AbstractRepository
             ->getConnectionForTable(static::TABLE_NAME);
 
         $arrayWhere = [
-            'news' => $newsUid, 
+            'news' => $newsUid,
             'feuser' => $feuserUid,
         ];
 
@@ -65,12 +67,12 @@ class UnreadnewsRepository extends AbstractRepository
     /**
      * Delete entries older than the given days
      *
-     * @param  int $days: Amount of days in the past till then all unread information shall be deleted.
+     * @param int $days : Amount of days in the past till then all unread information shall be deleted.
      * @return mixed
      */
     public function deletePeriod(int $days)
     {
-        $date = strtotime(-$days.' days');
+        $date = strtotime(-$days . ' days');
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable(static::TABLE_NAME);
@@ -86,8 +88,8 @@ class UnreadnewsRepository extends AbstractRepository
     /**
      * Get number of unread news for a selected category
      *
-     * @param  int $categoryUid: CategoryUid of news category
-     * @param  int $feuserUid: Uid of feuser record
+     * @param int $categoryUid : CategoryUid of news category
+     * @param int $feuserUid : Uid of feuser record
      * @return int
      */
     public function getCountForCategory(int $categoryUid, int $feuserUid): int
@@ -102,9 +104,9 @@ class UnreadnewsRepository extends AbstractRepository
                 tx_mdunreadnews_domain_model_unreadnews 
                 ON tx_mdunreadnews_domain_model_unreadnews.news = sys_category_record_mm.uid_foreign
             WHERE 
-                tx_mdunreadnews_domain_model_unreadnews.feuser = '.$feuserUid.'
-                '.$enableFields.'
-                AND sys_category_record_mm.uid_local = '.$categoryUid.'
+                tx_mdunreadnews_domain_model_unreadnews.feuser = ' . $feuserUid . '
+                ' . $enableFields . '
+                AND sys_category_record_mm.uid_local = ' . $categoryUid . '
                 AND sys_category_record_mm.tablenames = "tx_news_domain_model_news"
                 AND sys_category_record_mm.fieldname = "categories"
         ';

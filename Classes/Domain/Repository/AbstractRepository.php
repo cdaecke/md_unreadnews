@@ -1,4 +1,5 @@
 <?php
+
 namespace Mediadreams\MdUnreadnews\Domain\Repository;
 
 /**
@@ -17,9 +18,23 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * Class AbstractRepository
+ * @package Mediadreams\MdUnreadnews\Domain\Repository
  */
 abstract class AbstractRepository extends Repository
 {
+    /**
+     * @var Typo3QuerySettings;
+     */
+    protected $querySettings = null;
+
+    /**
+     * @param Typo3QuerySettings $querySettings
+     */
+    public function injectTypo3QuerySettings(Typo3QuerySettings $querySettings)
+    {
+        $this->querySettings = $querySettings;
+    }
+
     /**
      * Default orderings
      *
@@ -36,8 +51,7 @@ abstract class AbstractRepository extends Repository
      */
     public function initializeObject()
     {
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false);
-        $this->setDefaultQuerySettings($querySettings);
+        $this->querySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($this->querySettings);
     }
 }

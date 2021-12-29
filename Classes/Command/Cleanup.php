@@ -13,15 +13,12 @@ namespace Mediadreams\MdUnreadnews\Command;
  *
  */
 
-
 use Mediadreams\MdUnreadnews\Domain\Repository\UnreadnewsRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class Cleanup
@@ -35,18 +32,11 @@ class Cleanup extends Command
     protected $unreadnewsRepository;
 
     /**
-     * Cleanup constructor.
-     * @param null $name
+     * @param UnreadnewsRepository $unreadnewsRepository
      */
-    public function __construct($name = null)
+    public function injectUnreadnewsRepository(UnreadnewsRepository $unreadnewsRepository)
     {
-        parent::__construct($name);
-
-        // get objectManager
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-
-        // get unreadnewsRepository
-        $this->unreadnewsRepository = $this->objectManager->get(UnreadnewsRepository::class);
+        $this->unreadnewsRepository = $unreadnewsRepository;
     }
 
     /**
@@ -78,12 +68,12 @@ class Cleanup extends Command
         $days = (int)$input->getArgument('days') ? $input->getArgument('days') : 30;
         $res = $this->unreadnewsRepository->deletePeriod($days);
 
-        if ($res) {
-            $io->success('All entries, which are older than ' . $days . ' day are deleted.');
+        if ($res > 0) {
+            $io->success('All entries, which are older than ' . $days . ' days are deleted.');
         } else {
-            $io->error('An error occurred!');
+            $io->error('No entries, which are older than ' . $days . ' days are found.');
         }
 
-        return 0;
+        return SELF::SUCCESS;
     }
 }
