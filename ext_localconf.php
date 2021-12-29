@@ -8,11 +8,11 @@ call_user_func(
             'Mediadreams.MdUnreadnews',
             'Unread',
             [
-                'Unreadnews' => 'list, isUnread, allUnreadCount, categoryCount, removeUnread'
+                \Mediadreams\MdUnreadnews\Controller\UnreadnewsController::class => 'list, isUnread, allUnreadCount, categoryCount, removeUnread'
             ],
             // non-cacheable actions
             [
-                'Unreadnews' => 'list, isUnread, allUnreadCount, categoryCount, removeUnread'
+                \Mediadreams\MdUnreadnews\Controller\UnreadnewsController::class => 'list, isUnread, allUnreadCount, categoryCount, removeUnread'
             ]
         );
 
