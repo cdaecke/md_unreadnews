@@ -5,7 +5,8 @@ services:
     public: false
 
   Mediadreams\MdUnreadnews\:
-    resource: "../Classes/*"
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
 
   Mediadreams\MdUnreadnews\Command\Cleanup:
     tags:
