@@ -15,7 +15,7 @@ plugin.tx_mdunreadnews_unread {
 
     settings {
         # cat=plugin.tx_mdunreadnews_unread//a; type=int+; label=Uid of storage page for table tx_mdunreadnews_domain_model_unreadnews 
-        storagePid = 
+        storagePid =
 
         # cat=plugin.tx_mdunreadnews_unread//a; type=string; label=Categories, which should be considered
         categories = 

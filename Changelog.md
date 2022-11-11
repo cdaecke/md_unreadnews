@@ -1,3 +1,9 @@
+# Version 4.0.1 (2022-11-11)
+- [TASK] Update dependency to new version of ext:news.
+
+All changes
+https://github.com/cdaecke/md_unreadnews/compare/4.0.0...4.0.1
+
 # Version 4.0.0 (2021-12-29)
 - [FEATURE] TYPO3 11 compatibility
 - [TASK] Dependency to ext:numbered_pagination was added.
