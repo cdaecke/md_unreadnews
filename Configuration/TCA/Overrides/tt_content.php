@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') || die();
+defined('TYPO3') or die();
 
 call_user_func(
     function()
@@ -9,7 +9,7 @@ call_user_func(
          *
          */
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-            'Mediadreams.MdUnreadnews',
+            'MdUnreadnews',
             'Unread',
             'LLL:EXT:md_unreadnews/Resources/Private/Language/locallang.xlf:unreadPlugin'
         );

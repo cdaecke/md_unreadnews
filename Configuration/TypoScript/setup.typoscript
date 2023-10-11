@@ -59,7 +59,7 @@ plugin.tx_mdunreadnews_unread {
                     height = 250
                 }
 
-                dummyImage = typo3conf/ext/news/Resources/Public/Images/dummy-preview-image.png
+                dummyImage = EXT:news/Resources/Public/Images/dummy-preview-image.png
             }
 
             # Paginate configuration.
@@ -93,15 +93,10 @@ PAGE_REMOVE_UNREAD_NEWS {
     10 {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
         extensionName = MdUnreadnews
-        pluginName = Unread
+        pluginName = UnreadRemove
         vendorName = Mediadreams
 
-        switchableControllerActions {
-            Unreadnews {
-                1 = removeUnread
-            }
-        }
-
+        settings < plugin.tx_mdunreadnews_unread
         settings {
             useStdWrap := addToList(newsUid)
 
@@ -122,15 +117,10 @@ lib.mdIsUnread = USER
 lib.mdIsUnread {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = MdUnreadnews
-    pluginName = Unread
+    pluginName = UnreadIsUnread
     vendorName = Mediadreams
 
-    switchableControllerActions {
-        Unreadnews {
-            1 = isUnread
-        }
-    }
-
+    settings < plugin.tx_mdunreadnews_unread
     settings {
         useStdWrap := addToList(newsUid)
 
@@ -149,14 +139,8 @@ lib.mdAllUnreadCount = USER
 lib.mdAllUnreadCount {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = MdUnreadnews
-    pluginName = Unread
+    pluginName = UnreadCount
     vendorName = Mediadreams
-
-    switchableControllerActions {
-        Unreadnews {
-            1 = allUnreadCount
-        }
-    }
 }
 
 /**
@@ -169,15 +153,10 @@ lib.mdCategoryCount = USER
 lib.mdCategoryCount {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = MdUnreadnews
-    pluginName = Unread
+    pluginName = UnreadCategory
     vendorName = Mediadreams
 
-    switchableControllerActions {
-        Unreadnews {
-            1 = categoryCount
-        }
-    }
-
+    settings < plugin.tx_mdunreadnews_unread
     settings {
         useStdWrap := addToList(categoryUid)
 
@@ -196,15 +175,10 @@ lib.mdRemoveUnread = USER
 lib.mdRemoveUnread {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = MdUnreadnews
-    pluginName = Unread
+    pluginName = UnreadRemove
     vendorName = Mediadreams
 
-    switchableControllerActions {
-        Unreadnews {
-            1 = removeUnread
-        }
-    }
-
+    settings < plugin.tx_mdunreadnews_unread
     settings {
         useStdWrap := addToList(newsUid)
 

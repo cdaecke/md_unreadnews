@@ -13,6 +13,7 @@ namespace Mediadreams\MdUnreadnews\Controller;
  *
  */
 
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class UnreadnewsController
@@ -23,9 +24,10 @@ class UnreadnewsController extends BaseController
     /**
      * List all unread news for user
      *
-     * @return void
+     * @return ResponseInterface
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         if (isset($this->loggedinUserUid)) {
             $unreadnews = $this->unreadnewsRepository->findByFeuser($this->loggedinUserUid);
@@ -36,14 +38,16 @@ class UnreadnewsController extends BaseController
                 $this->settings['list']['paginate']['maximumNumberOfLinks']
             );
         }
+
+        return $this->htmlResponse();
     }
 
     /**
      * Get info, if selected news is unread for user
      *
-     * @return void
+     * @return ResponseInterface
      */
-    public function isUnreadAction()
+    public function isUnreadAction(): ResponseInterface
     {
         if (
             (int)$this->settings['newsUid'] > 0
@@ -56,14 +60,16 @@ class UnreadnewsController extends BaseController
 
             $this->view->assign('unreadnews', $unreadnews);
         }
+
+        return $this->htmlResponse();
     }
 
     /**
      * Get number of all unread items
      *
-     * @return void
+     * @return ResponseInterface
      */
-    public function allUnreadCountAction()
+    public function allUnreadCountAction(): ResponseInterface
     {
         $unreadnews = $this
             ->unreadnewsRepository
@@ -71,14 +77,16 @@ class UnreadnewsController extends BaseController
             ->count();
 
         $this->view->assign('unreadnews', $unreadnews);
+
+        return $this->htmlResponse();
     }
 
     /**
      * Get number of unread items per category
      *
-     * @return void
+     * @return ResponseInterface
      */
-    public function categoryCountAction()
+    public function categoryCountAction(): ResponseInterface
     {
         if (
             (int)$this->settings['categoryUid'] > 0
@@ -91,14 +99,16 @@ class UnreadnewsController extends BaseController
 
             $this->view->assign('unreadnews', $unreadnews);
         }
+
+        return $this->htmlResponse();
     }
 
     /**
      * Remove unread for selected news and user
      *
-     * @return void
+     * @return ResponseInterface
      */
-    public function removeUnreadAction()
+    public function removeUnreadAction(): ResponseInterface
     {
         if (
             (int)$this->settings['newsUid'] > 0
@@ -109,6 +119,8 @@ class UnreadnewsController extends BaseController
                 $this->loggedinUserUid
             );
         }
+
+        return $this->htmlResponse();
     }
 
 }

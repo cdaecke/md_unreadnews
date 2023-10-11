@@ -30,7 +30,7 @@ class Unreadnews extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * The feuser entry.
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @var FrontendUser
      * @Extbase\Validate("NotEmpty")
      */
     protected $feuser = 0;

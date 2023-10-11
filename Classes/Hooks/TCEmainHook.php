@@ -14,6 +14,8 @@ namespace Mediadreams\MdUnreadnews\Hooks;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -56,26 +58,15 @@ class TCEmainHook
                 $newsUid = $pObj->substNEWwithIDs[$recordUid];
 
                 if (!$newsUid) {
-                    /** @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
-                    $flashMessage = GeneralUtility::makeInstance(
-                        \TYPO3\CMS\Core\Messaging\FlashMessage::class,
-                        'Unread info for news could not be saved!',
-                        'EXT:md_unreadnews',
-                        \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING,
-                        true
-                    );
-                    
-                    /** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-                    $flashMessageService = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Messaging\FlashMessageService::class);
-                    /** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
-                    $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
-                    $defaultFlashMessageQueue->enqueue($flashMessage);
-
+                    $this->enqueueFlashmessage('Unread info for news could not be saved!');
                     return;
                 }
 
+                $allowedCategories = [];
                 $typoscriptSettings = $this->getTyposcriptSettings();
-                $allowedCategories = GeneralUtility::trimExplode(',', $typoscriptSettings['categories'], true);
+                if ($typoscriptSettings !== false) {
+                    $allowedCategories = GeneralUtility::trimExplode(',', $typoscriptSettings['categories'], true);
+                }
 
                 // if there are categories configured in typoscript
                 if (count($allowedCategories) > 0) {
@@ -147,14 +138,16 @@ class TCEmainHook
                         ->from('fe_users');
         
         // if $allowedGroup is set, just find users with given group
-        $allowedGroup = trim($typoscriptSettings['feGroup']);
-        if ($allowedGroup) {
-            $feuserData = $feuserData->where( 
-                                $queryBuilderFeusers->expr()->inSet(
-                                    'usergroup', 
-                                    $queryBuilderFeusers->createNamedParameter($allowedGroup, \PDO::PARAM_INT)
-                                )
-                            );
+        if (isset($typoscriptSettings['feGroup'])) {
+            $allowedGroup = trim($typoscriptSettings['feGroup']);
+            if ($allowedGroup) {
+                $feuserData = $feuserData->where(
+                    $queryBuilderFeusers->expr()->inSet(
+                        'usergroup',
+                        $queryBuilderFeusers->createNamedParameter($allowedGroup, \PDO::PARAM_INT)
+                    )
+                );
+            }
         }
 
         // finally get data
@@ -232,7 +225,8 @@ class TCEmainHook
     /**
      * Get typoscript settings
      *
-     * @return array
+     * @return bool|array
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     private function getTyposcriptSettings()
     {
@@ -242,7 +236,37 @@ class TCEmainHook
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
 
-        // typoscript settings for ext:md_unreadnews plugin "unread"
-        return $extbaseFrameworkConfiguration['plugin.']['tx_mdunreadnews_unread.']['settings.'];
+        try {
+            // typoscript settings for ext:md_unreadnews plugin "unread"
+            return $extbaseFrameworkConfiguration['plugin.']['tx_mdunreadnews_unread.']['settings.'];
+        } catch(\Exception $e) {
+            $this->enqueueFlashmessage('Unread info for news could not be saved! Check, if static TypoScript of `ext:md_unreadnews` is included.');
+
+            return false;
+        }
+    }
+
+    /**
+     * Show flash message
+     *
+     * @param string $message
+     * @throws \TYPO3\CMS\Core\Exception
+     */
+    private function enqueueFlashmessage(string $message): void
+    {
+        /** @var FlashMessage $flashMessage */
+        $flashMessage = GeneralUtility::makeInstance(
+            FlashMessage::class,
+            $message,
+            'EXT:md_unreadnews',
+            FlashMessage::WARNING,
+            true
+        );
+
+        /** @var FlashMessageService $flashMessageService */
+        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
+        /** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
+        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+        $defaultFlashMessageQueue->enqueue($flashMessage);
     }
 }

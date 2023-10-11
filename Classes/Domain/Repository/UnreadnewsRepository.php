@@ -40,7 +40,7 @@ class UnreadnewsRepository extends AbstractRepository
         $constraints[] = $query->equals('news', $newsUid);
         $constraints[] = $query->equals('feuser', $feuserUid);
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
         return $query->execute()->count();
     }
 

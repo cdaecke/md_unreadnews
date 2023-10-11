@@ -14,6 +14,7 @@ namespace Mediadreams\MdUnreadnews\Domain\Repository;
  */
 
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
@@ -40,8 +41,8 @@ abstract class AbstractRepository extends Repository
      *
      */
     protected $defaultOrderings = [
-        'news_datetime' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-        'uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+        'news_datetime' => QueryInterface::ORDER_DESCENDING,
+        'uid' => QueryInterface::ORDER_DESCENDING,
     ];
 
     /**

@@ -66,7 +66,7 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         // If user is logged in, set uid
-        if ($GLOBALS['TSFE']->fe_user->user['uid']) {
+        if (isset($GLOBALS['TSFE']->fe_user->user) && $GLOBALS['TSFE']->fe_user->user['uid']) {
             $this->loggedinUserUid = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
         }
     }
