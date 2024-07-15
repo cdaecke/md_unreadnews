@@ -1,3 +1,9 @@
+# Version 5.0.0 (2024-07-15)
+- [TASK] TYPO3 v12 compatibility
+
+All changes
+https://github.com/cdaecke/md_unreadnews/compare/4.0.1...5.0.0
+
 # Version 4.0.1 (2022-11-11)
 - [TASK] Update dependency to new version of ext:news.
 
