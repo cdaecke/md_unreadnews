@@ -26,6 +26,11 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
+     * User Id of the logged in user
+     */
+    protected $loggedinUserUid = null;
+
+    /**
      * unreadnewsRepository
      *
      * @var UnreadnewsRepository
