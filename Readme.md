@@ -1,4 +1,5 @@
 **!!! Obsolete !!!**
+
 This extension was replaced by [ext:md_notifications](https://github.com/cdaecke/md_notifications). For TYPO3 v12 and newer, please use the versatile extension [ext:md_notifications](https://github.com/cdaecke/md_notifications) instead!
 
 **This extension won't get any updates anymore!**
