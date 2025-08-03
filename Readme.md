@@ -1,3 +1,8 @@
+**!!! Obsolete !!!**
+This extension was replaced by [ext:md_notifications](https://github.com/cdaecke/md_notifications). For TYPO3 v12 and newer, please use the versatile extension [ext:md_notifications](https://github.com/cdaecke/md_notifications) instead!
+
+**This extension won't get any updates anymore!**
+
 # TYPO3 Extension ``md_unreadnews``
 
 This extension adds unread information to the records of ``ext:news`` for frontend users. In a list of news records, a frontend user can see, whether or not an article was read by himself. Additional it is possible to show how many unread articles are in a category.
