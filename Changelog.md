@@ -1,3 +1,9 @@
+# Version 5.0.3 (2025-08-05)
+- [TASK] Update documentation: add hint to ext:md_notifications
+
+All changes
+https://github.com/cdaecke/md_unreadnews/compare/5.0.2...5.0.3
+
 # Version 5.0.2 (2024-12-15)
 - [TASK] Update dependency to ext:news
 

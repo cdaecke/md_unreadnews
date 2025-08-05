@@ -1,8 +1,10 @@
+<div style="width:100%;border:2px dashed red;padding:10px;">
 **!!! Obsolete !!!**
 
 This extension was replaced by [ext:md_notifications](https://github.com/cdaecke/md_notifications). For TYPO3 v12 and newer, please use the versatile extension [ext:md_notifications](https://github.com/cdaecke/md_notifications) instead!
 
 **This extension won't get any updates anymore!**
+<div>
 
 # TYPO3 Extension ``md_unreadnews``
 
